@@ -66,6 +66,27 @@ namespace FirstWebApiUI_Core_04_03_22.Controllers
             }
             return View(resultlist);
         }
+        public IActionResult UserIndex()
+        {
+            List<UserModel> resultlist = new List<UserModel>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://jsonplaceholder.typicode.com/");
+                var responseTalk = client.GetAsync("users");
+                responseTalk.Wait();
+
+                var result = responseTalk.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    readTask.Wait();
+                    var products = readTask.Result;
+                    resultlist = JsonConvert.DeserializeObject<List<UserModel>>(products);
+                }
+            }
+        
+            return View(resultlist);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

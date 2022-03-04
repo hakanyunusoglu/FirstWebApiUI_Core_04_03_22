@@ -9,20 +9,18 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Surname</th>
-             <th>Email</th>
-              <th>Adress</th>
-               <th>City</th>
-                <th>Country</th>
+            <th>Email</th>
+            <th>Adress</th>
+            <th>City</th>
+            <th>Country</th>
         </tr>
     </thead>
     <tbody>
-        @foreach(var item in Model)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>@item.PersonID</td>
-                <td>@item.PersonName</td>
-                <td>@item.PersonSurname</td>
+                <td>@item.PersonName @item.PersonSurname</td>
                 <td>@item.PersonEmail</td>
                 <td>@item.PersonAdress</td>
                 <td>@item.PersonCity</td>
