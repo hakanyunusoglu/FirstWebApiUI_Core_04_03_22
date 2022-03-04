@@ -5,6 +5,12 @@
         dataType: "json",
         contentType: "application/json; charset=UTF-8",
         success: function (returndata) {
+            $.each(returndata, function (i, item) {
+                console.log(item);
+                $("#TableBody").append(`<tr><td>${item.productID}</td><td>${item.description}</td><td>${item.brand}</td></tr>`);
+            });
+        },
+        error: function () {
 
         }
     })
