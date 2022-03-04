@@ -27,7 +27,7 @@ namespace FirstWebApiUI_Core_04_03_22.Controllers
         }
 
         public IActionResult Privacy()
-        {
+        { //WEB API den gelen verileri controller üzerinden modele çekerek View'e gönderdik
             List<ProductDto> resultlist = new List<ProductDto>();
             using (var client = new HttpClient())
             {
@@ -42,6 +42,26 @@ namespace FirstWebApiUI_Core_04_03_22.Controllers
                     readTask.Wait();
                     var products = readTask.Result;
                     resultlist = JsonConvert.DeserializeObject<List<ProductDto>>(products);
+                }
+            }
+            return View(resultlist);
+        }
+        public IActionResult PersonIndex()
+        {
+            List<PersonDTO> resultlist = new List<PersonDTO>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44321/Api/");
+                var responseTalk = client.GetAsync("Person/LoadPersonList");
+                responseTalk.Wait();
+
+                var result = responseTalk.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync();
+                    readTask.Wait();
+                    var products = readTask.Result;
+                    resultlist = JsonConvert.DeserializeObject<List<PersonDTO>>(products);
                 }
             }
             return View(resultlist);

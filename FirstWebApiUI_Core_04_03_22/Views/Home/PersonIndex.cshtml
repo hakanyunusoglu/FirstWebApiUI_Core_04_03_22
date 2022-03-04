@@ -1,0 +1,33 @@
+﻿@model IEnumerable<FirstWebApiUI.Models.PersonDTO>
+@{
+    ViewData["Title"] = "Personal List";
+}
+<h2>PERSONEL LIST</h2>
+
+<table class="table table-striped table-bordered text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Surname</th>
+             <th>Email</th>
+              <th>Adress</th>
+               <th>City</th>
+                <th>Country</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.PersonID</td>
+                <td>@item.PersonName</td>
+                <td>@item.PersonSurname</td>
+                <td>@item.PersonEmail</td>
+                <td>@item.PersonAdress</td>
+                <td>@item.PersonCity</td>
+                <td>@item.PersonCountry</td>
+            </tr>
+        }
+    </tbody>
+</table>
